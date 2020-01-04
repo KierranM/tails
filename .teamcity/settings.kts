@@ -94,7 +94,7 @@ object BuildPublish : BuildType({
                 namesAndTags = """
                     kierranm/tails:latest
                     kierranm/tails:%build.vcs.number%
-                    kierranm/tails:%teamcity.build.branch%
+                    kierranm/tails:%image.version%
                 """.trimIndent()
                 commandArgs = """--pull --label "org.opencontainers.image.revision"="%build.vcs.number%" --label "org.opencontainers.image.version"="%image.version%" --label "org.opencontainers.image.created"="%image.createdat%""""
             }
