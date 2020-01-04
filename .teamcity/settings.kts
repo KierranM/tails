@@ -30,9 +30,9 @@ object Build : BuildType({
                 source = path {
                     path = "Dockerfile"
                 }
+                namesAndTags = "kierranm/tails"
+                commandArgs = """--pull --label "org.opencontainers.image.revision"="%build.vcs.number%" --label "org.opencontainers.image.version"="%teamcity.build.branch%" --label "org.opencontainers.image.created"="%image.createdat%""""
             }
-            namesAndTags = "kierranm/tails"
-            commandArgs = """--pull --label "org.opencontainers.image.revision"="%build.vcs.number%" --label "org.opencontainers.image.version"="%teamcity.build.branch%" --label "org.opencontainers.image.created"="%image.createdat%""""
         }
     }
 
@@ -78,13 +78,13 @@ object BuildPublish : BuildType({
                 source = path {
                     path = "Dockerfile"
                 }
+                namesAndTags = """
+                    kierranm/tails:latest
+                    kierranm/tails:%build.vcs.number%
+                    kierranm/tails:%teamcity.build.branch%
+                """.trimIndent()
+                commandArgs = """--pull --label "org.opencontainers.image.revision"="%build.vcs.number%" --label "org.opencontainers.image.version"="%teamcity.build.branch%" --label "org.opencontainers.image.created"="%image.createdat%""""
             }
-            namesAndTags = """
-                kierranm/tails:latest
-                kierranm/tails:%build.vcs.number%
-                kierranm/tails:%teamcity.build.branch%
-            """.trimIndent()
-            commandArgs = """--pull --label "org.opencontainers.image.revision"="%build.vcs.number%" --label "org.opencontainers.image.version"="%teamcity.build.branch%" --label "org.opencontainers.image.created"="%image.createdat%""""
         }
     }
 
