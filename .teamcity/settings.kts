@@ -74,6 +74,7 @@ object BuildPublish : BuildType({
 
     params {
         param("image.createdat", "")
+        param("image.version", "")
     }
 
     steps {
@@ -95,7 +96,7 @@ object BuildPublish : BuildType({
                     kierranm/tails:%build.vcs.number%
                     kierranm/tails:%teamcity.build.branch%
                 """.trimIndent()
-                commandArgs = """--pull --label "org.opencontainers.image.revision"="%build.vcs.number%" --label "org.opencontainers.image.version"="%teamcity.build.branch%" --label "org.opencontainers.image.created"="%image.createdat%""""
+                commandArgs = """--pull --label "org.opencontainers.image.revision"="%build.vcs.number%" --label "org.opencontainers.image.version"="%image.version%" --label "org.opencontainers.image.created"="%image.createdat%""""
             }
         }
     }
