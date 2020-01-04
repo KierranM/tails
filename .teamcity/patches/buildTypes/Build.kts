@@ -37,7 +37,7 @@ changeBuildType(RelativeId("Build")) {
                 }
                 contextDir = ""
                 namesAndTags = ""
-                commandArgs = """--pull --label "org.opencontainers.image.revision"="%build.vcs.number%" --label "org.opencontainers.image.version"="%teamcity.build.branch%" --label "org.opencontainers.image.created"="${'$'}(date -u -Iseconds)""""
+                commandArgs = """--pull --label "org.opencontainers.image.revision"="%build.vcs.number%" --label "org.opencontainers.image.version"="%teamcity.build.branch%" --label "org.opencontainers.image.created"="%image.createdat%""""
             }
         }
     }
