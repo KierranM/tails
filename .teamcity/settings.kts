@@ -20,6 +20,10 @@ object Build : BuildType({
         root(DslContext.settingsRoot)
     }
 
+    params {
+        param("image.createdat", "")
+    }
+
     steps {
         script {
             name = "Get Date"
@@ -66,6 +70,10 @@ object BuildPublish : BuildType({
 
     vcs {
         root(DslContext.settingsRoot)
+    }
+
+    params {
+        param("image.createdat", "")
     }
 
     steps {
