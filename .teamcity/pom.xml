@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <name>Kierranm_Docker Config DSL Script</name>
-  <groupId>Kierranm_Docker</groupId>
-  <artifactId>Kierranm_Docker_dsl</artifactId>
+  <name>Kierranm_DockerTails Config DSL Script</name>
+  <groupId>Kierranm_DockerTails</groupId>
+  <artifactId>Kierranm_DockerTails_dsl</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <parent>
