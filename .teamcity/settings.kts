@@ -81,6 +81,10 @@ object BuildPublish : BuildType({
             name = "Get Date"
             scriptContent = """echo "##teamcity[setParameter name='image.createdat' value='${'$'}(date -u -Iseconds)']""""
         }
+        script {
+            name = "Get Version"
+            scriptContent = """echo "##teamcity[setParameter name='image.version' value='${'$'}(echo '%teamcity.build.branch%' | sed 's/^v\(.*\)/\1/')']""""
+        }
         dockerCommand {
             commandType = build {
                 source = path {
