@@ -24,7 +24,13 @@ changeBuildType(RelativeId("Build")) {
         }
     }
     steps {
-        update<DockerCommandStep>(0) {
+        insert(0) {
+            script {
+                name = "Get Date"
+                scriptContent = """echo "##teamcity[setParameter name='image.createdat' value='${'$'}(date -u -Iseconds)']""""
+            }
+        }
+        update<DockerCommandStep>(1) {
             commandType = build {
                 source = path {
                     path = "Dockerfile"
@@ -32,12 +38,6 @@ changeBuildType(RelativeId("Build")) {
                 contextDir = ""
                 namesAndTags = ""
                 commandArgs = """--pull --label "org.opencontainers.image.revision"="%build.vcs.number%" --label "org.opencontainers.image.version"="%teamcity.build.branch%" --label "org.opencontainers.image.created"="${'$'}(date -u -Iseconds)""""
-            }
-        }
-        insert(1) {
-            script {
-                name = "Get Date"
-                scriptContent = """echo "##teamcity[setParameter name='image.createdat' value='${'$'}(date -u -Iseconds)']""""
             }
         }
     }
