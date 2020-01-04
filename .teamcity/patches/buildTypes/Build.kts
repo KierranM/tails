@@ -5,6 +5,7 @@ import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.CommitStatusPu
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.commitStatusPublisher
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.DockerCommandStep
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.dockerCommand
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_2.ui.*
 
 /*
@@ -31,6 +32,12 @@ changeBuildType(RelativeId("Build")) {
                 contextDir = ""
                 namesAndTags = ""
                 commandArgs = """--pull --label "org.opencontainers.image.revision"="%build.vcs.number%" --label "org.opencontainers.image.version"="%teamcity.build.branch%" --label "org.opencontainers.image.created"="${'$'}(date -u -Iseconds)""""
+            }
+        }
+        insert(1) {
+            script {
+                name = "Get Date"
+                scriptContent = """echo "##teamcity[setParameter name='image.createdat' value='${'$'}(date -u -Iseconds)']""""
             }
         }
     }
