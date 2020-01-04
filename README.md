@@ -1,10 +1,19 @@
 # Tails
-A tiny sidecar image for tailing files
+A tiny sidecar image for tailing files. Useful for when your containerised
+application logs to multiple files that you'd like to be able to retrieve
+using something like `kubectl logs`.
 
 ## What's Inside?
 
 `/bin/tail`, that's it. This image is built from scratch and the `tail`
 binary is copied from `busybox`.
+
+## Why not just use busybox?
+
+You can. This was built so I could have a sidecar image with a very minimal
+attack surface. Busybox is fantastically small (nearly as small as this),
+but it still includes a whole lot of binaries that I don't need for my logging
+sidecars.
 
 ## Usage
 
