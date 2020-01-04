@@ -1,5 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.PullRequests
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.dockerSupport
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.commitStatusPublisher
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.pullRequests
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.dockerCommand
@@ -97,6 +98,24 @@ object BuildPublish : BuildType({
                     kierranm/tails:%image.version%
                 """.trimIndent()
                 commandArgs = """--pull --label "org.opencontainers.image.revision"="%build.vcs.number%" --label "org.opencontainers.image.version"="%image.version%" --label "org.opencontainers.image.created"="%image.createdat%""""
+            }
+        }
+        dockerCommand {
+            commandType = push {
+                namesAndTags = """
+                    kierranm/tails:latest
+                    kierranm/tails:%build.vcs.number%
+                    kierranm/tails:%image.version%
+                """.trimIndent()
+                removeImageAfterPush = false
+            }
+        }
+    }
+
+    features {
+        dockerSupport {
+            loginToRegistry = on {
+                dockerRegistryId = "PROJECT_EXT_4"
             }
         }
     }
