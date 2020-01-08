@@ -1,3 +1,7 @@
+FROM busybox:1.31.1 as initial
+
+RUN addgroup --gid 12001 tails && adduser -u 12001 -G tails -D -H tails
+
 FROM scratch
 
 LABEL "org.opencontainers.image.title"         = "kierranm/tail"
@@ -14,8 +18,11 @@ LABEL "org.opencontainers.image.licenses"      = "Apache License 2.0"
 # LABEL "org.opencontainers.image.revision" = ""
 # LABEL "org.opencontainers.image.version" = ""
 
+USER tails:12001
+# Copy in the user file so we can run as tails
+COPY --from=initial /etc/passwd /etc/passwd
 
-COPY --from=busybox:1.31.1 /bin/tail /bin/tail
+COPY --from=initial /bin/tail /bin/tail
 
 ENTRYPOINT ["/bin/tail"]
 CMD [""]
