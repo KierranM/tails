@@ -24,5 +24,5 @@ COPY --from=initial /etc/passwd /etc/passwd
 
 COPY --from=initial /bin/tail /bin/tail
 
-ENTRYPOINT ["/bin/tail"]
+ENTRYPOINT ["/bin/tail", "-f"]
 CMD [""]

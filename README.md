@@ -41,7 +41,6 @@ containers:
   - name: http-logs
     image: kierranm/tails
     args:
-      - -f
       - /logs/http.txt
     volumeMounts:
       - mountPath: /logs
@@ -49,7 +48,6 @@ containers:
   - name: error-logs
     image: kierranm/tails
     args:
-      - -f
       - /logs/error.txt
     volumeMounts:
       - mountPath: /logs
